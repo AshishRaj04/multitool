@@ -1,0 +1,2 @@
+# Ignore Python backend - deployed separately on Render
+api/
