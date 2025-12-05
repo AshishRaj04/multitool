@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Neo-Brutalism Theme */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors */
+  --color-neo-bg: #e0e7f1;
+  --color-neo-black: #000000;
+  --color-neo-yellow: #fbff48;
+  --color-neo-pink: #ff90e8;
+  --color-neo-white: #ffffff;
+
+  /* Shadows */
+  --shadow-neo: 5px 5px 0px 0px rgba(0, 0, 0, 1);
+  --shadow-neo-pressed: 0px 0px 0px 0px rgba(0, 0, 0, 1);
+
+  /* Fonts */
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Dot Grid Background */
+:root {
+  --dot-bg: #e0e7f1;
+  --dot-color: #c4ccd8;
+  --dot-size: 1.5px;
+  --dot-space: 22px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--dot-bg);
+  background-image: radial-gradient(
+    circle,
+    var(--dot-color) var(--dot-size),
+    transparent var(--dot-size)
+  );
+  background-size: var(--dot-space) var(--dot-space);
+  color: var(--color-neo-black);
+  font-family: var(--font-mono);
+  min-height: 100vh;
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* Typewriter Effect */
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--color-neo-black);
+  }
+}
+
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid var(--color-neo-black);
+  animation: typewriter 2s steps(40, end), blink 0.75s step-end infinite;
+}
+
+/* Utility Classes */
+.neo-border {
+  border: 3px solid var(--color-neo-black);
+}
+
+.neo-shadow {
+  box-shadow: var(--shadow-neo);
+}
+
+.neo-shadow-pressed {
+  box-shadow: var(--shadow-neo-pressed);
 }
