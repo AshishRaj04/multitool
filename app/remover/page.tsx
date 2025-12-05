@@ -62,18 +62,16 @@ export default function RemoverPage() {
       });
 
       if (!response.ok) {
-        if (response.status === 500) {
-          throw new Error("SERVER_OVERLOAD // TRY_AGAIN");
-        }
-        const data = await response.json();
-        throw new Error(data.error || "Failed to process image");
+        throw new Error("SERVER_OVERLOAD // TRY_AGAIN");
       }
 
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       setProcessedImage(url);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(
+        err instanceof Error ? err.message : "SERVER_OVERLOAD // TRY_AGAIN"
+      );
     } finally {
       setLoading(false);
     }

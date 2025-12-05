@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MULTITOOL // UTILITY OS
 
-## Getting Started
+A Neo-Brutalist utility dashboard with AI-powered tools.
 
-First, run the development server:
+![Neo-Brutalism Design](https://img.shields.io/badge/Design-Neo--Brutalism-black?style=for-the-badge)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
+![Python](https://img.shields.io/badge/Python-FastAPI-blue?style=for-the-badge&logo=python)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🛠️ Tools
+
+| Tool                   | Description                             | Status  |
+| ---------------------- | --------------------------------------- | ------- |
+| **Grammar Fixer**      | AI-powered text correction using Gemini | ✅ Live |
+| **YouTube Downloader** | Extract video info & download links     | ✅ Live |
+| **BG Remover**         | AI background removal with rembg        | ✅ Live |
+
+## 🏗️ Architecture
+
+```
+┌─────────────────┐     ┌─────────────────┐
+│   Vercel        │     │   Render        │
+│   (Next.js)     │────▶│   (FastAPI)     │
+│                 │     │                 │
+│ • Grammar API   │     │ • YouTube API   │
+│ • Frontend      │     │ • BG Remover    │
+└─────────────────┘     └─────────────────┘
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Deployment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Frontend (Vercel)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Connect your GitHub repo to Vercel
+2. Add environment variables:
+   ```
+   GEMINI_API_KEY=your_gemini_api_key
+   PYTHON_API_URL=https://your-render-app.onrender.com
+   ```
+3. Deploy
 
-## Learn More
+### Backend (Render)
 
-To learn more about Next.js, take a look at the following resources:
+1. Create new Web Service on Render
+2. Connect the `api/` folder
+3. **Build Command:** `pip install -r requirements.txt`
+4. **Start Command:** `uvicorn server:app --host 0.0.0.0 --port $PORT`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💻 Local Development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Frontend
+npm install
+npm run dev
 
-## Deploy on Vercel
+# Backend (separate terminal)
+cd api
+pip install -r requirements.txt
+python server.py
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎨 Design
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Style:** Neo-Brutalism
+- **Fonts:** Space Grotesk (display), JetBrains Mono (body)
+- **Features:** Hard shadows, thick borders, dot-grid background
+
+## 📊 Analytics
+
+- Vercel Web Analytics
+- Vercel Speed Insights
+
+## 📝 License
+
+MIT

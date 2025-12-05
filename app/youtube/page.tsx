@@ -70,18 +70,22 @@ export default function YouTubePage() {
         body: JSON.stringify({ url }),
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error("SERVER_OVERLOAD // TRY_AGAIN");
+      }
 
       if (!response.ok) {
-        if (response.status === 500) {
-          throw new Error("SERVER_OVERLOAD // TRY_AGAIN");
-        }
-        throw new Error(data.error || "Failed to fetch video info");
+        throw new Error(data.error || "SERVER_OVERLOAD // TRY_AGAIN");
       }
 
       setVideoInfo(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(
+        err instanceof Error ? err.message : "SERVER_OVERLOAD // TRY_AGAIN"
+      );
     } finally {
       setLoading(false);
     }
@@ -101,18 +105,22 @@ export default function YouTubePage() {
         }),
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error("SERVER_OVERLOAD // TRY_AGAIN");
+      }
 
       if (!response.ok) {
-        if (response.status === 500) {
-          throw new Error("SERVER_OVERLOAD // TRY_AGAIN");
-        }
-        throw new Error(data.error || "Failed to get download link");
+        throw new Error(data.error || "SERVER_OVERLOAD // TRY_AGAIN");
       }
 
       window.open(data.url, "_blank");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Download failed");
+      setError(
+        err instanceof Error ? err.message : "SERVER_OVERLOAD // TRY_AGAIN"
+      );
     } finally {
       setDownloading(null);
     }

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import GoogleAdsense from "@/components/GoogleAdsense";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
@@ -37,6 +39,8 @@ export default function RootLayout({
       >
         <GoogleAdsense pId={adsensePid} />
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -46,18 +46,22 @@ export default function GrammarPage() {
         body: JSON.stringify({ text: inputText }),
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error("SERVER_OVERLOAD // TRY_AGAIN");
+      }
 
       if (!response.ok) {
-        if (response.status === 500) {
-          throw new Error("SERVER_OVERLOAD // TRY_AGAIN");
-        }
-        throw new Error(data.error || "Failed to process text");
+        throw new Error(data.error || "SERVER_OVERLOAD // TRY_AGAIN");
       }
 
       setCorrectedText(data.corrected);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(
+        err instanceof Error ? err.message : "SERVER_OVERLOAD // TRY_AGAIN"
+      );
     } finally {
       setLoading(false);
     }
